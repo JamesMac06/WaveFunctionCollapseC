@@ -1,0 +1,21 @@
+#ifndef LLNTL_H
+#define LLNTL_H
+
+struct lln{
+  int i;
+  struct lln *prv;
+  struct lln *nxt;
+  struct tile tl;
+};
+
+struct lln makeList(tile tl);
+
+struct lln *listGetNext(lln *mbr);
+
+struct lln *listGetPrev(lln *mbr);
+
+void listAppend(lln *mbr, tile tl);
+
+struct lln *listGetAt(lln *mbr, int i);
+
+#endif

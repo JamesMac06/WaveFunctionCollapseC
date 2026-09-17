@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+#include "tile.h"
+
+struct lln{
+  int i;
+  struct lln *prv;
+  struct lln *nxt;
+  struct tile *tl;
+};
+
+struct lln makeList(struct tile *tl) {
+  struct lln hd;
+  hd.i = 0;
+  hd.tl = tl;
+  hd.prv = NULL;
+  hd.nxt = NULL;
+}
+
+struct lln *listGetNext(struct lln *mbr) {
+  if(mbr->nxt != NULL) {
+    return mbr->nxt;
+  } else {
+    return mbr;
+  }
+}
+
+struct lln *listGetPrev(struct lln *mbr) {
+  if(mbr->prv != NULL) {
+    return mbr->prv;
+  } else {
+    return mbr;
+  }
+}
+
+void listAppend(struct lln *mbr, struct tile *tl) {
+  while(mbr->nxt != NULL) {
+    mbr = mbr->nxt;
+  }
+
+  struct lln spl = makeList(tl);
+  spl.i = mbr->i + 1;
+
+  mbr->nxt = &spl;
+}
+
+struct lln *listGetAt(struct lln *mbr, int i) {
+  while(mbr->i != i) {
+    if(mbr->i < i) {
+      mbr = listGetNext(mbr);
+    } else {
+      mbr = listGetPrev(mbr);
+    }
+  }
+  return mbr;
+}

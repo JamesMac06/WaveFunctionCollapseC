@@ -1,0 +1,18 @@
+#ifndef CELL_H
+#define CELL_H
+
+struct cell {
+  //var value;
+  int x;
+  int y;
+  int noTl;
+  //tile tls[];
+  struct cell *north;
+  struct cell *east;
+  struct cell *south;
+  struct cell *west;
+};
+
+struct cell *getAdj(struct cell *source, int dir);
+
+void init(int x, int y, int noTl;);
