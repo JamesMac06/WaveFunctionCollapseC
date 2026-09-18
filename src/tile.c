@@ -12,25 +12,23 @@ struct tile{
   char *wesVlds[MAX_SIDE_ENTROPY];
 };
 
-void reformatStr(char *str[]) {
-  if(strlen(str) < MAX_SIDE_ENTROPY) {
-    char new[MAX_SIDE_ENTROPY];
-    for(int i=0;i<strlen(str);i++) {
-      new[i] = str[i];
+void reformatStr(char *des[], char *str[]) {
+  if(strlen(*str) < MAX_SIDE_ENTROPY) {
+    for(int i=0;i<strlen(*str);i++) {
+      *des[i] = *str[i];
     }
-    for(int i=0;i<MAX_SIDE_ENTROPY-strlen(str);i++) {
-      new[i] = '0';
+    for(int i=0;i<MAX_SIDE_ENTROPY-strlen(*str);i++) {
+      *des[i] = '0';
     }
-    str = *new;
   }
 }
 
-struct tile makeTile(char val, char nV[], char eV[], char sV[], char wV[]) {
+struct tile makeTile(char val, char *nV[], char *eV[], char *sV[], char *wV[]) {
   struct tile out;
   out.val = val;
-  out.norVlds=reformatStr(*nV);
-  out.easVlds=reformatStr(*eV);
-  out.souVlds=reformatStr(*sV);
-  out.wesVlds=reformatStr(*wV);
+  reformatStr(out.norVlds, nV);
+  reformatStr(out.norVlds, eV);
+  reformatStr(out.norVlds, sV);
+  reformatStr(out.norVlds, wV);
   return out;
 }
